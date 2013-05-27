@@ -1,7 +1,7 @@
 ##Installation
 
     cd ~
-    git clone git@github:pawelropa/dotvim.git ~/.dotvim
+    git clone git@github.com:pawelropa/dotvim.git ~/.dotvim
     ln -s ~/.dotvim/ ~/.vim
     ln -s ~/.dotvim/vimrc ~/.vimrc
     ln -s ~/.dotvim/gvimrc ~/.gvimrc
