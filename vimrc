@@ -19,7 +19,7 @@ filetype plugin on
 
 set number " show lines numbers
 
-set guifont=Inconsolata:h17 " which font do we want use
+set guifont=Inconsolata:h15 " which font do we want use
 " color scheme setup for Terminal
 set background=light
 
