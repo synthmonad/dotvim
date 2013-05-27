@@ -6,10 +6,20 @@ set nocompatible " choose no compatibility with vi
 syntax on        " syntax highlighting
 set encoding=utf-8 " setting encoding to UTF-8
 set showcmd        " display incomplete commands
-filetype plugin indent on " load file type plugins + indentation
-set guifont=Inconsolata:h17 " which font do we want use
+
+
+set expandtab
+set tabstop=2 shiftwidth=2 softtabstop=2
+set smartindent
+set autoindent 
+
+filetype on " load file type plugins + indentation
+filetype indent on
+filetype plugin on
+
 set number " show lines numbers
 
+set guifont=Inconsolata:h17 " which font do we want use
 " color scheme setup for Terminal
 set background=light
 
