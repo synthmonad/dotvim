@@ -24,7 +24,6 @@ set guifont=Inconsolata:h15 " which font do we want use
 set background=light
 
 if has('gui_running')
-
 else
     let g:solarized_termcolors=256
 endif
