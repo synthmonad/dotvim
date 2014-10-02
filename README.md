@@ -7,3 +7,4 @@
     ln -s ~/.dotvim/vimrc ~/.vimrc
     ln -s ~/.dotvim/gvimrc ~/.gvimrc
     ln -s ~/.dotvim/xvimrc ~/.xvimrc
+    vim +PluginInstall +qall
