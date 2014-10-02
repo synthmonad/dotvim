@@ -10,8 +10,10 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" additional psugins
+" additional plugins
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-rails'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
