@@ -1,7 +1,3 @@
-source ~/.dotvim/bundle/vim-pathogen/autoload/pathogen.vim
-
-execute pathogen#infect()
-
 set nocompatible " choose no compatibility with vi
 syntax on        " syntax highlighting
 set encoding=utf-8 " setting encoding to UTF-8
@@ -11,11 +7,13 @@ set showcmd        " display incomplete commands
 set expandtab
 set tabstop=2 shiftwidth=2 softtabstop=2
 set smartindent
-set autoindent 
+set autoindent
 
 filetype on " load file type plugins + indentation
 filetype indent on
 filetype plugin on
+
+au FileType * setlocal formatoptions-=cro
 
 set number " show lines numbers
 set nowrap " no wrapping
@@ -28,20 +26,25 @@ else
     let g:solarized_termcolors=256
 endif
 
-colorscheme solarized
+" colorscheme solarized
 
 set wildignore+=*/vendor/**
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
 let mapleader=","
 
-"noremap <leader>s :w<kEnter>  
-"inoremap <leader>s <Esc>:w<kEnter>i 
+"noremap <leader>s :w<kEnter>
+"inoremap <leader>s <Esc>:w<kEnter>i
 
 inoremap jj <ESC>
 
 noremap <leader>s :w<CR>
 vnoremap <leader>s <Esc>:wgv<CR>
 inoremap <leader>s <Esc>:w<CR>
+
+noremap <leader>q :q<CR>
+vnoremap <leader>q <Esc>:q<CR>
+inoremap <leader>q <Esc>:q<CR>
 
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
@@ -57,7 +60,7 @@ map <Up> :echo "no!" <CR>
 map <Down> :echo "no!" <CR>
 
 "vroom plugin customization
-let g:vroom_map_keys = 0 
+let g:vroom_map_keys = 0
 
 silent! map <unique> <Leader>t :VroomRunTestFile<CR>
 silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
@@ -94,9 +97,18 @@ endfunction
 map <leader>n :call RenameFile()<cr>
 
 
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 autocmd FileType ruby nmap <F5> :!ruby %<cr>
+
+silent! nmap <C-p> :NERDTreeToggle<CR>
+silent! map <F3> :NERDTreeFind<CR>
+
+let g:NERDTreeMapActivateNode="<F3>"
+let g:NERDTreeMapPreview="<F4>"
+
+map <D-}> <C-w><Right>
+map <D-{> <C-w><Left>
 
