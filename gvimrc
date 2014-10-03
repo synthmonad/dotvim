@@ -15,6 +15,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-rails'
 Plugin 'kien/ctrlp.vim'
+Plugin 'bling/vim-airline'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -58,4 +59,24 @@ else
 endif
 
 colorscheme solarized
+
+" ##Visual
+" Prettiness on the bottom {{{
+" That weird colorful line on the bottom
+let g:airline_theme='tomorrow'
+set laststatus=2
+set encoding=utf-8
+if has("gui_running")
+  let g:airline_powerline_fonts=1
+  " Even special font for this crap
+  set guifont=Source\ Code\ Pro\ for\ Powerline:h13
+endif
+
+function! AirlineOverride(...)
+  let g:airline_section_a = airline#section#create(['mode'])
+  let g:airline_section_b = airline#section#create_left(['branch'])
+  let g:airline_section_c = airline#section#create_left(['%f'])
+  let g:airline_section_y = airline#section#create([])
+endfunction
+autocmd VimEnter * call AirlineOverride()
 
