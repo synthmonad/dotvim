@@ -19,6 +19,7 @@ Plugin 'bling/vim-airline'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-endwise'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -181,4 +182,10 @@ set background=light
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
 colorscheme solarized
+
+" NerdTree
+map <C-n> :NERDTreeToggle<CR>
+
+"Ctrl-p
+let g:ctrlp_split_window = 0
 
