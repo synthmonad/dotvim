@@ -12,7 +12,6 @@ Plugin 'gmarik/Vundle.vim'
 
 " additional plugins
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-rails'
 Plugin 'kien/ctrlp.vim'
 
