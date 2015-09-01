@@ -12,8 +12,16 @@ Plugin 'gmarik/Vundle.vim'
 
 " additional plugins
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-rails'
-Plugin 'kien/ctrlp.vim'
+" Plugin 'tpope/vim-rails'
+" Plugin 'kien/ctrlp.vim'
+Plugin 'fatih/vim-go'
+Plugin 'majutsushi/tagbar'
+
+Plugin 'Shougo/neocomplete'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
+Plugin 'fatih/molokai'
+Plugin 'garyburd/go-explorer'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -138,6 +146,7 @@ silent! map <F3> :NERDTreeFind<CR>
 let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
 
+nmap <F8> :TagbarToggle<CR>
 map <D-}> <C-w><Right>
 map <D-{> <C-w><Left>
 
