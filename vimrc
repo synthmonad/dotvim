@@ -12,16 +12,17 @@ Plugin 'gmarik/Vundle.vim'
 
 " additional plugins
 Plugin 'altercation/vim-colors-solarized'
-" Plugin 'tpope/vim-rails'
-" Plugin 'kien/ctrlp.vim'
 Plugin 'fatih/vim-go'
 Plugin 'majutsushi/tagbar'
+Plugin 'bling/vim-airline'
 
 Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'fatih/molokai'
 Plugin 'garyburd/go-explorer'
+Plugin 'scrooloose/nerdtree' 
+Plugin 'kien/ctrlp.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -149,6 +150,8 @@ function! AirlineOverride(...)
 endfunction
 autocmd VimEnter * call AirlineOverride()
 
+set laststatus=2
+
 " Extra info on the bottom
 set ruler
 
@@ -172,7 +175,7 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
 set background=light
-" solarized options 
+" solarized options
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
 colorscheme solarized
@@ -181,5 +184,5 @@ colorscheme solarized
 map <C-n> :NERDTreeToggle<CR>
 
 "Ctrl-p
+let g:ctrlp_map = '<c-p>'
 let g:ctrlp_split_window = 0
-
