@@ -7,3 +7,5 @@
     ln -s ~/.dotvim/vimrc ~/.vimrc
     ln -s ~/.dotvim/gvimrc ~/.gvimrc
     vim +PluginInstall +qall
+    mkdir -p ~/.config/nvim
+    ln -s ~/.dotvim/nvimrc ~/.config/nvim/init.vim
