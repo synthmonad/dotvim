@@ -9,3 +9,5 @@
     vim +PluginInstall +qall
     mkdir -p ~/.config/nvim
     ln -s ~/.dotvim/nvimrc ~/.config/nvim/init.vim
+    git clone https://github.com/gmarik/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
+    nvim +PluginInstall +qall
