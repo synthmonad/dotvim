@@ -2,13 +2,13 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.dotvim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " additional plugins
 Plugin 'altercation/vim-colors-solarized'
@@ -23,6 +23,35 @@ Plugin 'fatih/molokai'
 Plugin 'garyburd/go-explorer'
 Plugin 'scrooloose/nerdtree' 
 Plugin 'kien/ctrlp.vim'
+Plugin 'Raimondi/delimitMate'
+
+" Dash integration
+Plugin 'rizzatti/dash.vim'
+
+" Rust plugins
+"Plugin 'rust-lang/rust.vim'
+
+" Elixir plugins
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'vim-syntastic/syntastic'
+
+" javascript, coffeescript
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'pangloss/vim-javascript'
+
+" Rails
+Plugin 'tpope/vim-ragtag'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-rake'
+Plugin 'vim-ruby/vim-ruby'
+
+" Plugin 'christoomey/vim-tmux-runner'
+" Plugin 'gabebw/vim-spec-runner'
+
+Plugin 'tpope/vim-fugitive'
+
+Plugin 'szw/vim-tags'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -44,7 +73,7 @@ set showcmd        " display incomplete commands
 
 set expandtab
 set tabstop=2 shiftwidth=2 softtabstop=2
-set smartindent
+set nosmartindent
 set autoindent
 
 filetype on " load file type plugins + indentation
@@ -52,6 +81,8 @@ filetype indent on
 filetype plugin on
 
 au FileType * setlocal formatoptions-=cro
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+inoremap # X<BS>#
 
 set number " show lines numbers
 set nowrap " no wrapping
@@ -61,7 +92,7 @@ set background=dark
 
 if has('gui_running')
 else
-    let g:solarized_termcolors=256
+  let g:solarized_termcolors=256
 endif
 
 
@@ -168,17 +199,11 @@ nnoremap <silent> <Leader>/ :nohlsearch<CR>
 " Tweak ESC to be 'jk' typed fast
 imap jk <ESC>
 
-" RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-"map <Leader>s :call RunNearestSpec()<CR>
-"map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-
-set background=light
+set background=dark
 " solarized options
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
-colorscheme solarized
+colorscheme molokai 
 
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
@@ -186,3 +211,64 @@ map <C-n> :NERDTreeToggle<CR>
 "Ctrl-p
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_split_window = 0
+
+let g:ctrlp_custom_ignore = 'tmp$\|env$\|\.git$\|\.hg$\|\.svn$\|\.rvm$\|vendor$'
+
+"let g:ctrlp_custom_ignore = {
+""  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+""  \ 'file': '\v\.(exe|so|dll)$',
+""  \ 'env': '\v[\/]\env$',
+""  \ }
+
+" " Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy  "+yy
+
+" " Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+
+" rust
+let g:rustfmt_autosave = 1
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"Disabling rustc due to wrong error handling
+"let g:syntastic_rust_checkers = ['rustc']
+
+let g:syntastic_python_pylint_args = "--load-plugins pylint_django"
+let g:syntastic_htmldjango_checkers = ['python/pylint']
+
+" ignoring swp files
+set wildignore+=*.swp,*~,._*
+
+
+" Vim tmux runner
+" I don't want the default key mappings
+let g:VtrUseVtrMaps = 0
+" Vim spec runner
+let g:spec_runner_dispatcher = 'call VtrSendCommand("{command}")'
+map <Leader>t <Plug>RunCurrentSpecFile
+map <Leader>tt <Plug>RunFocusedSpec
+map <Leader>tl <Plug>RunMostRecentSpec
+
+vmap <M-]> >gv
+vmap <M-[> <gv
+
+nmap <M-]> >>
+nmap <M-[> <<
+
+"omap <C-]> >>
+"omap <C-[> <<
+

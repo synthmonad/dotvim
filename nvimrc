@@ -1,93 +1,86 @@
-""""""" Plugin management stuff """""""
-set nocompatible
-filetype off
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin('~/.config/nvim/bundle')
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.dotvim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
+" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" EasyMotion - Allows <leader><leader>(b|e) to jump to (b)eginning or (end) of words.
-Plugin 'easymotion/vim-easymotion'
+" Color themes for vim 
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'fatih/molokai'
 
-" Ctrl-P - Fuzzy file search
+"Plugin 'fatih/vim-go'
+"Plugin 'majutsushi/tagbar'
+
+" Airline - line which is displayed on the bottom of the vim
+Plugin 'bling/vim-airline'
+
+" Nerdtree - for showing files in the sidebar (F3)
+Plugin 'scrooloose/nerdtree' 
+
+" Ctrl-P - for fast file serach
 Plugin 'kien/ctrlp.vim'
 
-" Neomake build tool (mapped below to <c-b>)
-Plugin 'benekastah/neomake'
+"Plugin 'Shougo/neocomplete'
+"Plugin 'Shougo/neosnippet'
+"Plugin 'Shougo/neosnippet-snippets'
 
-" Autocomplete for python
-Plugin 'davidhalter/jedi-vim'
-" Remove extraneous whitespace when edit mode is exited
-Plugin 'thirtythreeforty/lessspace.vim'
-
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'fatih/vim-go'
-Plugin 'majutsushi/tagbar'
-
-Plugin 'Shougo/neocomplete'
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'fatih/molokai'
-Plugin 'garyburd/go-explorer'
-Plugin 'scrooloose/nerdtree'
-
-" Status bar mods
-Plugin 'bling/vim-airline'
-Plugin 'airblade/vim-gitgutter'
-
-" Tab completion
-Plugin 'ervandew/supertab'
-
-" After all plugins...
-call vundle#end()
-filetype plugin indent on
-
-""""""" Jedi-VIM """""""
-" Don't mess up undo history
-let g:jedi#show_call_signatures = "0"
-
-""""""" SuperTab configuration """""""
-"let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
-function! Completefunc(findstart, base)
-    return "\<c-x>\<c-p>"
-endfunction
-
-"call SuperTabChain(Completefunc, '<c-n>')
-
-"let g:SuperTabCompletionContexts = ['g:ContextText2']
+"Plugin 'garyburd/go-explorer'
 
 
-""""""" General coding stuff """""""
-" Highlight 80th column
-set colorcolumn=79
-" Always show status bar
-set laststatus=1
-" Let plugins show effects after 500ms, not 4s
-set updatetime=500
-" Disable mouse click to go to position
-set mouse-=a
-" Don't let autocomplete affect usual typing habits
-set completeopt=menuone,preview,noinsert
-" Let vim-gitgutter do its thing on large files
-let g:gitgutter_max_signs=10000
+"Plugin 'Raimondi/delimitMate'
 
-" If your terminal's background is white (light theme), uncomment the following
-" to make EasyMotion's cues much easier to read.
-" hi link EasyMotionTarget String
-" hi link EasyMotionShade Comment
-" hi link EasyMotionTarget2First String
-" hi link EasyMotionTarget2Second Statement
+" Dash integration
+Plugin 'rizzatti/dash.vim'
 
+" Rust plugins
+"Plugin 'rust-lang/rust.vim'
 
-""""""" Python stuff """""""
-syntax enable
-set number showmatch
-set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent
-let python_highlight_all = 1
+" Elixir plugins
+"Plugin 'elixir-lang/vim-elixir'
+"Plugin 'vim-syntastic/syntastic'
 
-" Neomake and other build commands (ctrl-b)
-nnoremap <C-b> :w<cr>:Neomake<cr>
+" javascript, coffeescript
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'pangloss/vim-javascript'
+
+" Rails
+"Plugin 'tpope/vim-ragtag'
+"Plugin 'tpope/vim-rails'
+"Plugin 'tpope/vim-rake'
+"Plugin 'vim-ruby/vim-ruby'
+
+" Plugin 'christoomey/vim-tmux-runner'
+" Plugin 'gabebw/vim-spec-runner'
+
+Plugin 'tpope/vim-fugitive'
+
+" Python indentation plugin
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'nvie/vim-flake8'
+
+"Plugin 'szw/vim-tags'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 syntax on        " syntax highlighting
 set encoding=utf-8 " setting encoding to UTF-8
@@ -95,7 +88,7 @@ set showcmd        " display incomplete commands
 
 set expandtab
 set tabstop=2 shiftwidth=2 softtabstop=2
-set smartindent
+set nosmartindent
 set autoindent
 
 filetype on " load file type plugins + indentation
@@ -103,6 +96,8 @@ filetype indent on
 filetype plugin on
 
 au FileType * setlocal formatoptions-=cro
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+inoremap # X<BS>#
 
 set number " show lines numbers
 set nowrap " no wrapping
@@ -112,16 +107,15 @@ set background=dark
 
 if has('gui_running')
 else
-    let g:solarized_termcolors=256
+  let g:solarized_termcolors=256
 endif
 
 set wildignore+=*/vendor/**
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
-let mapleader=","
+set noswapfile 
 
-"noremap <leader>s :w<kEnter>
-"inoremap <leader>s <Esc>:w<kEnter>i
+let mapleader=","
 
 noremap <leader>s :w<CR>
 vnoremap <leader>s <Esc>:wgv<CR>
@@ -130,6 +124,12 @@ inoremap <leader>s <Esc>:w<CR>
 noremap <leader>q :q<CR>
 vnoremap <leader>q <Esc>:q<CR>
 inoremap <leader>q <Esc>:q<CR>
+
+" Splits tweaks {{{
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ARROW KEYS ARE UNACCEPTABLE
@@ -182,10 +182,6 @@ silent! map <F3> :NERDTreeFind<CR>
 let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
 
-nmap <F8> :TagbarToggle<CR>
-"map <D-}> <C-w><Right>
-"map <D-{> <C-w><Left>
-
 function! AirlineOverride(...)
   let g:airline_section_a = airline#section#create(['mode'])
   let g:airline_section_b = airline#section#create_left(['branch'])
@@ -212,17 +208,11 @@ nnoremap <silent> <Leader>/ :nohlsearch<CR>
 " Tweak ESC to be 'jk' typed fast
 imap jk <ESC>
 
-" RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-"map <Leader>s :call RunNearestSpec()<CR>
-"map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-
-set background=light
+set background=dark
 " solarized options
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
-colorscheme solarized
+colorscheme molokai 
 
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
@@ -231,10 +221,76 @@ map <C-n> :NERDTreeToggle<CR>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_split_window = 0
 
-" Splits tweaks {{{
-"map <C-h> <C-w>h
-map <BS> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+let g:ctrlp_custom_ignore = 'tmp$\|env$\|\.git$\|\.hg$\|\.svn$\|\.rvm$\|vendor$'
 
+" " Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy  "+yy
+
+" " Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"Disabling rustc due to wrong error handling
+"let g:syntastic_rust_checkers = ['rustc']
+
+let g:syntastic_python_pylint_args = "--load-plugins pylint_django"
+let g:syntastic_htmldjango_checkers = ['python/pylint']
+
+" ignoring swp files
+set wildignore+=*.swp,*~,._*
+
+
+" Vim tmux runner
+" I don't want the default key mappings
+let g:VtrUseVtrMaps = 0
+" Vim spec runner
+let g:spec_runner_dispatcher = 'call VtrSendCommand("{command}")'
+map <Leader>t <Plug>RunCurrentSpecFile
+map <Leader>tt <Plug>RunFocusedSpec
+map <Leader>tl <Plug>RunMostRecentSpec
+
+"Dash plugin
+nmap <silent> <leader>d <Plug>DashSearch
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
+
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2
+
+" Flagging unnecessary whitespaces
+highlight BadWhitespace ctermbg=red guibg=red
+
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+syntax on
+
+vnoremap < <gv
+vnoremap > >gv
+
+vmap <M-]> >gv
+vmap <M-[> <gv
